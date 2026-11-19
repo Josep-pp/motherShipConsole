@@ -38,6 +38,11 @@ jobs:
       #Build app
       - name: Build app
         run: npm run build:prod
+
+      #Renaming index.html to fix routing in deployment
+
+      - name: Rename index for routing
+        run: mv dist/motherShipConsole/index.html dist/motherShipConsole/404.html
         
       #Deployment
       - name: Deploy to Pages
