@@ -1,4 +1,4 @@
-import { afterNextRender, AfterViewInit, Component, effect, ElementRef, inject, ViewChild } from '@angular/core';
+import { afterNextRender, AfterViewInit, Component, effect, ElementRef, inject, Injector, runInInjectionContext, ViewChild } from '@angular/core';
 import { Terminal } from '../../services/terminal';
 import { FormsModule } from '@angular/forms';
 
@@ -25,32 +25,31 @@ export class Console implements AfterViewInit{
   commandHistory: string[] = [];
   historyIndex = -1;
 
-  constructor() {
-    effect(() => {
-    
-      this.terminalService.history();
+constructor() {
+  const injector = inject(Injector);
 
-      afterNextRender({
-        earlyRead: () => {
-          return this.historyContainer?.nativeElement.scrollHeight;
-        },
+  effect(() => {
+    // Track changes to terminal history
+    this.terminalService.history();
 
-        write: (scrollHeight) => {
-          if (scrollHeight !== undefined) {
-            const history = this.historyContainer.nativeElement;
-            history.scrollTop = scrollHeight;
-          }
-        }
+    runInInjectionContext(injector, () => {
+      afterNextRender(() => {
+        const history = this.historyContainer?.nativeElement;
+
+        if (!history) return;
+
+        history.scrollTop = history.scrollHeight;
       });
     });
-  }
+  });
+}
 
   ngAfterViewInit(): void {
     this.focusInput();
   }
 
   focusInput(): void {
-    this.cmdInput.nativeElement.focus();
+    this.cmdInput?.nativeElement?.focus();
   }
 
   onEnter(): void {
@@ -103,12 +102,17 @@ export class Console implements AfterViewInit{
   }
   setTimeout(() => this.focusInput(), 0);
 }
-  onDocumentClick(event: MouseEvent): void {
 
-    const selection = window.getSelection();
-    if (!selection || selection.toString().length === 0) {
-      this.focusInput();
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    if (this.terminalContainer?.nativeElement.contains(target)) {
+      
+      const selection = window.getSelection();
+
+      if (!selection || selection.toString().length === 0) {
+        this.focusInput();
+      }
     }
-    
   }
 }
