@@ -39,6 +39,15 @@ jobs:
       - name: Build app
         run: npm run build:prod
 
+
+      #Prepare Pages files
+      - name: Prepare Pages files
+        run: |
+          cd dist/motherShipConsole/browser
+          mv index.csr.html index.html
+          cp index.html 404.html
+          touch .nojekyll  
+
       #Deployment
       - name: Deploy to Pages
         uses: crazy-max/ghaction-github-pages@v5.0.0
