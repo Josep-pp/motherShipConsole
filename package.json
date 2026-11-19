@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --configuration production --base-href /mothershipConsole/",
+    "build:prod": "ng build --configuration production --base-href /motherShipConsole/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:motherShipConsole": "node dist/motherShipConsole/server/server.mjs"
