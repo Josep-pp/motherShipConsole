@@ -42,12 +42,12 @@ jobs:
       #Renaming index.html to fix routing in deployment
 
       - name: Rename index for routing
-        run: mv dist/motherShipConsole/index.html dist/motherShipConsole/404.html
+        run: mv dist/mothershipConsole/index.html dist/mothershipConsole/404.html
         
       #Deployment
       - name: Deploy to Pages
         uses: crazy-max/ghaction-github-pages@v5.0.0
         with:
-          build_dir: dist/motherShipConsole
+          build_dir: dist/mothershipConsole
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
