@@ -39,11 +39,6 @@ jobs:
       - name: Build app
         run: npm run build:prod
 
-      #Renaming index.html to fix routing in deployment
-
-      - name: Rename index for routing
-        run: mv dist/mothershipConsole/index.html dist/mothershipConsole/404.html
-        
       #Deployment
       - name: Deploy to Pages
         uses: crazy-max/ghaction-github-pages@v5.0.0
