@@ -1,0 +1,70 @@
+
+.terminal-window {
+  display: flex;
+  flex-direction: column;
+
+  height: 90vh; 
+  width: 100%;
+
+  overflow: hidden;
+
+  background: transparent;
+  color: #fff;
+}
+
+.history {
+  flex: 1;
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  white-space: pre-wrap; 
+  word-break: break-word;
+  margin-bottom: 4px;
+}
+
+.line.input {
+  color: #58a6ff;
+  font-weight: bold;
+}
+
+.line.output {
+  color: #c9d1d9;
+}
+
+.line.error {
+  color: #f85149;
+}
+
+.input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.prompt {
+  color: #3fb950;
+  font-weight: bold;
+  margin-right: 8px;
+  user-select: none;
+}
+
+input {
+  background: transparent;
+  border: none;
+  color: #c9d1d9;
+  font-family: inherit;
+  font-size: inherit;
+  flex: 1;
+  outline: none;
+  caret-color: #3fb950; 
+}
+

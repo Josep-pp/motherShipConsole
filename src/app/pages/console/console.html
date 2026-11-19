@@ -1,0 +1,26 @@
+<div class="terminal-window" (click)="focusInput()" #terminalContainer>
+  
+  <!-- History -->
+  <div class="history" #historyContainer>
+    @for (line of terminalService.history(); track $index) {
+      <div [class]="'line ' + line.type">{{ line.text }}</div>
+    }
+  </div>
+
+  <!-- Input line -->
+  <div class="input-line">
+    <span class="prompt">{{ username() }}</span>
+    <input
+      #cmdInput
+      type="text"
+      [(ngModel)]="currentCommand"
+      (keydown.enter)="onEnter()"
+      (keydown.arrowup)="navigateHistory(-1, $event)"
+      (keydown.arrowdown)="navigateHistory(1, $event)"
+      (keydown.tab)="handleTab($event)"
+      autocomplete="off"
+      spellcheck="false"
+    />
+  </div>
+
+</div>
