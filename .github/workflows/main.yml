@@ -43,6 +43,6 @@ jobs:
       - name: Deploy to Pages
         uses: crazy-max/ghaction-github-pages@v5.0.0
         with:
-          build_dir: dist/motherShipConsole
+          build_dir: dist/motherShipConsole/browser
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
